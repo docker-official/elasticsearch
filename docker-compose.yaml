@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  es742:
+    image: elasticsearch:7.4.2
+    container_name: es742
+    stdin_open: true
+    tty: true
+    privileged: true
+    volumes:
+      - "./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml"
+      - "./elasticsearch/data:/usr/share/elasticsearch/data"
+      - "./elasticsearch/plugins:/usr/share/elasticsearch/plugins"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    networks:
+      default:
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+
+
+
