@@ -13,11 +13,16 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    networks:
+      elasticsearch:
+        # ipv4_address: 10.128.0.5 # Specify a static IP address for containers for this service when joining the network.
     logging:
       driver: "json-file"
       options:
         max-size: "1g"
 networks:
-  default:
-    name: bridge
-    external: true
+  elasticsearch:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.128.0.0/16
